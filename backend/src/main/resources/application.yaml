@@ -1,3 +1,29 @@
 spring:
   application:
-    name: backend
+    name: imobiliaria
+
+  # Lê as variáveis do mesmo .env usado pelo Docker Compose
+  config:
+    import: optional:file:../infra/.env[.properties]
+
+  # Conexão base: banco de manutenção "postgres", usado só para listar e provisionar tenants.
+  # Nenhum dado de negócio mora aqui.
+  datasource:
+    url: jdbc:postgresql://localhost:${POSTGRES_PORT:5432}/postgres
+    username: imob_app
+    password: ${IMOB_APP_PASSWORD}
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: none
+
+  # O Flyway vai rodar por tenant, de forma programática, na Fase 1
+  flyway:
+    enabled: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
