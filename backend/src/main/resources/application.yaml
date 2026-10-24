@@ -31,3 +31,6 @@ management:
 server:
   servlet:
     context-path: /api
+
+springdoc:
+  writer-with-order-by-keys: true

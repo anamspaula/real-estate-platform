@@ -32,6 +32,9 @@ jobs:
       - name: Build e testes
         run: ./mvnw -B verify
 
+      - name: Especificação OpenAPI atualizada
+        run: git diff --exit-code ../docs/api/openapi.yaml
+
   frontend:
     name: Frontend
     runs-on: ubuntu-latest
@@ -49,6 +52,11 @@ jobs:
 
       - name: Instalar dependências
         run: npm ci
+
+      - name: Tipos da API atualizados
+        run: |
+          npm run gerar:api
+          git diff --exit-code src/compartilhado/api/esquema.d.ts
 
       - name: Lint
         run: npm run lint
