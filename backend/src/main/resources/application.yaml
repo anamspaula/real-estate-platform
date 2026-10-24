@@ -34,3 +34,7 @@ server:
 
 springdoc:
   writer-with-order-by-keys: true
+
+logging:
+  pattern:
+    level: "%5p [req=%X{requisicao:-} tenant=%X{tenant:-} usuario=%X{usuario:-}]"
