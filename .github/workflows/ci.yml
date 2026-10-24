@@ -63,3 +63,7 @@ jobs:
 
       - name: Checagem de tipos e build
         run: npm run build
+
+    logging:
+      pattern:
+        level: "%5p [req=%X{requisicao:-} tenant=%X{tenant:-} usuario=%X{usuario:-}]"
